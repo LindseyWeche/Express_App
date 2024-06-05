@@ -30,3 +30,14 @@ app.listen(port,()=>{
 });
 
 
+// Middleware function
+function logReq (req,res,next){
+    console.log('Received ${req.method} requestfor ${req.url}');
+    next()
+
+}
+app.use(logReq);
+app.get('/protected',(req, res) =>{
+    res.send('This route is Protected')
+})
+
