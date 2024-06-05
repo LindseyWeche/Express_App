@@ -1,0 +1,20 @@
+html 
+  head 
+   title Login Page 
+      body 
+        header 
+          h1 Sign in Here! 
+        main 
+        form (action= '/submit', method= 'POST')
+        div 
+           label (for= 'name') Name: 
+           input(type='text', id='name', placeholder='Enter your Name')
+        div 
+           label (for= 'email') Email: 
+           input(type='text', id='email', placeholder='Enter your Email')
+        div
+              label (for= 'password') Password: 
+              input(type='text', id='password', placeholder='Enter your Password')
+        div 
+            button (type= 'submit') Sign in
+

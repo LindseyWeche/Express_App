@@ -10,7 +10,7 @@ app.set ('views', './views')
 //Set the view Engine Pug
 app.set('view engine', 'pug');
 
-app.set ('views', path.join(_dirname, 'views'));
+app.set ('views', path.join(__dirname, 'views'));
 
 app.get ('/', (req, res)=> {
     res.render('index',{title: Welcome, message: 'Hello There'
@@ -19,8 +19,14 @@ app.get ('/', (req, res)=> {
 })
 
 
-// app.listen(port,()=>{
-//     console.log (`Server is running at port $(port)`);
-// });
+app.post ('/submit', (req, res)=>{
+    const {name,email,password} = req.body
+    res.send(`Successfully Submitted!`)
+})
+
+
+app.listen(port,()=>{
+    console.log (`Server is running successfully`);
+});
 
 
