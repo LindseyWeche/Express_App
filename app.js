@@ -4,31 +4,36 @@ const app = express();
 const path = require('path');
 const Port = 3000;
 
+app.listen(Port,(err)=>{
+    if (err) console.log(err);
+    console.log ("Server is running successfully", Port);
+});
 
-app.set ('views', './views')
 
-//Set the view Engine Pug
+// the view Engine Pug Settup
+app.set ('views', path.join(__dirname, '/views'));
 app.set('view engine', 'pug');
 
-app.set ('views', path.join(__dirname, 'views'));
-
-app.get ('/', (req, res)=> {
-    res.render('index',{title: Welcome, message: 'Hello There'
-
-    })
+app.use((req,res,next)=>{
+    console.log('Request URL:', req.URL);
+    next();
 })
 
 
-app.post ('/submit', (req, res)=>{
+app.get ('/', (req, res)=> {
+    res.render('index',{title: 'Welcome'})
+})
+app.get ('/log', (req, res)=> {
+    res.render('log',{title: 'Welcome'})
+})
+app.use('/','index')
+
+
+app.post ('/log', (req, res)=>{
     const {name,email,password} = req.body
     res.send(`Successfully Submitted!`)
 })
 
-
-app.listen(Port,()=>{
-    if (err) console.log(err);
-    console.log ("Server is running successfully", Port);
-});
 
 
 // Middleware function
@@ -43,5 +48,14 @@ app.get('/protected',(req, res) =>{
 })
 
 // Static Middleware
-app.use(express.static(path.join(__dirname,'Images')))
+// app.use(express.static(path.join(__dirname,'Images'))) 
+
+console.log(app.use(express.static(
+    path.join(__dirname, 'Images')
+)))
+
+// botton
+app.get('/', function (req, res) {
+    res.download('');
+});
 
