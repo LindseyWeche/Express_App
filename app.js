@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const port = 3000;
+const Port = 3000;
 
 
 app.set ('views', './views')
@@ -25,8 +25,9 @@ app.post ('/submit', (req, res)=>{
 })
 
 
-app.listen(port,()=>{
-    console.log (`Server is running successfully`);
+app.listen(Port,()=>{
+    if (err) console.log(err);
+    console.log ("Server is running successfully", Port);
 });
 
 
@@ -40,4 +41,7 @@ app.use(logReq);
 app.get('/protected',(req, res) =>{
     res.send('This route is Protected')
 })
+
+// Static Middleware
+app.use(express.static(path.join(__dirname,'Images')))
 
