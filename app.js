@@ -4,29 +4,30 @@ const app = express();
 const path = require('path');
 const Port = 3000;
 
+
 app.listen(Port,(err)=>{
     if (err) console.log(err);
     console.log ("Server is running successfully", Port);
 });
+
+app.use((req,res,next)=>{
+    console.log('Received', req.method, 'request for', req.url);
+    next();
+})
 
 
 // the view Engine Pug Settup
 app.set ('views', path.join(__dirname, '/views'));
 app.set('view engine', 'pug');
 
-app.use((req,res,next)=>{
-    console.log('Request URL:', req.URL);
-    next();
-})
 
 
-app.get ('/', (req, res)=> {
+app.get ('/index', (req, res)=> {
     res.render('index',{title: 'Welcome'})
-})
+});
 app.get ('/log', (req, res)=> {
-    res.render('log',{title: 'Welcome'})
-})
-app.use('/','index')
+    res.render('log',{title: 'Login'})
+});
 
 
 app.post ('/log', (req, res)=>{
